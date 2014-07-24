@@ -22,7 +22,7 @@ This is an open source [LGPL 2.1](LICENSE.md) licensed project. It uses the foll
  
 ## Add more shapes and commands
 
-- Do not want to write C++ code? Please reference to [test/src/vgtest/testview/shape](test/src/vgtest/testview/shape) package to write your own shape and command classes.
+- Do not want to write C++ code? Please reference to [testview/shape](https://github.com/touchvg/vgandroid-demo/tree/master/test/src/vgtest/testview/shape) package to write your own shape and command classes.
 
 - You can create library project containing your own shapes and commands. So the TouchVG and TouchVGCore libraries does not require changes.
 
