@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using touchvg.view;
 using System.Windows.Media;
+using touchvg.view;
 using democmds.api;
 
 namespace WpfDemo
@@ -58,6 +58,7 @@ namespace WpfDemo
             _view = new WPFGraphView(canvas1);
             _view.OnCommandChanged += new CommandChangedEventHandler(View_OnCommandChanged);
             _view.OnSelectionChanged += new touchvg.view.SelectionChangedEventHandler(View_OnSelectionChanged);
+            _view.ShowMessageHandler = View_ShowMessage;
 
             List<KeyValuePair<string, string>> commandSource = new List<KeyValuePair<string, string>>();
             for (int i = 0; i < _commands.Length; i += 2)
@@ -173,6 +174,41 @@ namespace WpfDemo
         private void zoomExtentBtn_Click(object sender, RoutedEventArgs e)
         {
             _helper.ZoomToExtent();
+        }
+
+        private class AutoClosingMessageBox
+        {
+            System.Threading.Timer _timeoutTimer;
+            string _caption;
+
+            AutoClosingMessageBox(string text, string caption, int timeout)
+            {
+                _caption = caption;
+                _timeoutTimer = new System.Threading.Timer(OnTimerElapsed,
+                    null, timeout, System.Threading.Timeout.Infinite);
+                MessageBox.Show(text, caption);
+            }
+            public static void Show(string text, string caption, int timeout)
+            {
+                new AutoClosingMessageBox(text, caption, timeout);
+            }
+            void OnTimerElapsed(object state)
+            {
+                IntPtr mbWnd = FindWindow(null, _caption);
+                if (mbWnd != IntPtr.Zero)
+                    SendMessage(mbWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                _timeoutTimer.Dispose();
+            }
+            const int WM_CLOSE = 0x0010;
+            [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+            static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+            [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+            static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+        }
+
+        private void View_ShowMessage(string text)
+        {
+            AutoClosingMessageBox.Show(text, "Message", 800);
         }
     }
 }
