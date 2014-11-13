@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using touchvg.view;
 using democmds.api;
+using Newtonsoft.Json.Linq;
 
 namespace WpfDemo
 {
@@ -85,6 +86,9 @@ namespace WpfDemo
             _helper.Load("C:\\Test\\page.vg");
             _helper.StartUndoRecord("C:\\Test\\undo");
             _helper.Command = "select";
+
+            JObject dictForTest = OptionsHelper.GetOptions(_helper);
+            OptionsHelper.SetOptions(_helper, dictForTest);
         }
 
         void Window1_Unloaded(object sender, RoutedEventArgs e)
@@ -208,7 +212,7 @@ namespace WpfDemo
 
         private void View_ShowMessage(string text)
         {
-            AutoClosingMessageBox.Show(text, "Message", 800);
+            AutoClosingMessageBox.Show(text, "Message", 400);
         }
     }
 }
