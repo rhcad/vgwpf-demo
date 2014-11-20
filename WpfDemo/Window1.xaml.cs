@@ -40,7 +40,8 @@ namespace WpfDemo
             "三点圆弧",  "arc3p",
             "圆心圆弧",  "arc_cse",
             "切线圆弧",  "arc_tan",
-            "点击测试(in DemoCmds)",  "hittest"
+            "点击测试(in DemoCmds)",  "hittest",
+            "尺寸标注(in DemoCmds)",  "dim_example"
         };
         string[] _lineStyles = new string[] {
             "实线",     "0",
