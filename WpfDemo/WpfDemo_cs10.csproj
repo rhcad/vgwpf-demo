@@ -159,8 +159,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>@xcopy $(ProjectDir)..\..\vgwpf\build\$(ConfigurationName)10\touchvg.dll $(TargetDir) /Y
-@xcopy $(ProjectDir)..\..\DemoCmds\wpf\build\$(ConfigurationName)10\democmds.dll $(TargetDir) /Y</PostBuildEvent>
+    <PostBuildEvent>@xcopy "$(ProjectDir)..\..\vgwpf\build\$(ConfigurationName)10\touchvg.dll" "$(TargetDir)" /Y
+@xcopy "$(ProjectDir)..\..\DemoCmds\wpf\build\$(ConfigurationName)10\democmds.dll" "$(TargetDir)" /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
