@@ -39,6 +39,10 @@ namespace WpfDemo
             {
                 Options[name] = value;
             }
+            public override void onGetOptionString(string name, string text)
+            {
+                Options[name] = text;
+            }
         }
     }
 }
