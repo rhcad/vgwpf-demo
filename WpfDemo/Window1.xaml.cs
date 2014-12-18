@@ -83,7 +83,7 @@ namespace WpfDemo
             this.cboLineStyle.SelectedIndex = 0;
 
             _helper = new WPFViewHelper(_view);
-            DemoCmds.registerCmds(_helper.CmdViewHandle());
+            DemoCmdsApi.registerCmds(_helper.CmdViewHandle());
             _helper.Load("C:\\Test\\page.vg");
             _helper.StartUndoRecord("C:\\Test\\undo");
             _helper.Command = "select";
