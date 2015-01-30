@@ -61,6 +61,7 @@ namespace WpfDemo
             _view.OnCommandChanged += new CommandChangedEventHandler(View_OnCommandChanged);
             _view.OnSelectionChanged += new touchvg.view.SelectionChangedEventHandler(View_OnSelectionChanged);
             _view.ShowMessageHandler = View_ShowMessage;
+            _view.OnShapeDblClicked += new ShapeClickEventHandler(View_OnShapeDblClicked);
 
             List<KeyValuePair<string, string>> commandSource = new List<KeyValuePair<string, string>>();
             for (int i = 0; i < _commands.Length; i += 2)
@@ -90,6 +91,15 @@ namespace WpfDemo
 
             JObject dictForTest = OptionsHelper.GetOptions(_helper);
             OptionsHelper.SetOptions(_helper, dictForTest);
+        }
+
+        void View_OnShapeDblClicked(object sender, ShapeClickEventArgs e)
+        {
+            if (e.ShapeType == 10)
+            {
+                e.Handled = true;
+                MessageBox.Show("View_OnShapeDblClicked");
+            }
         }
 
         void Window1_Unloaded(object sender, RoutedEventArgs e)
